@@ -36,6 +36,19 @@ const subscribe = combined.subscribe(val => console.log(val));
 
 console.log("rx", subscribe);
 
+
+// Example 2
+
+const source = Rx.Observable.of(1,2,3,4,5);
+//transparently log values from source with 'do'
+const example = source
+  .do(val => console.log(`BEFORE MAP: ${val}`))
+  .map(val => val + 10)
+  .do(val => console.log(`AFTER MAP: ${val}`));
+//'do' does not transform values
+//output: 11...12...13...14...15
+const subscribe = example.subscribe(val => console.log(val));
+
 class App extends Component {
   render() {
     return (
